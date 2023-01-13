@@ -24,7 +24,7 @@ const validator = (detail)=>{
     method: 'post',
     url: 'https://api.kleanmail.com/record_verification/api_record',
     headers: { 
-      'api_key': 'api_key::_pGu%2BOFsvtYnqUoIJtySe39nYsdU7xq5OWNusjZHonZ0%3D', 
+      'api_key': 'your_api_key_here', 
       'Content-Type': 'application/json'
     },
     data : info
@@ -45,7 +45,11 @@ const validator = (detail)=>{
   })
   .catch(function (error) {
     console.log(error);
-  }).finally(()=> {});
+  }).finally(()=> {
+    if (len == 0){
+      writeDate(valid,invalid)
+    }
+  });
 }
 
 // data.forEach(x =>{
@@ -60,8 +64,6 @@ function timer(){
     len = len-1;
     if(len>0){
      timer();
-    }else {
-      writeDate(valid,invalid)
     }
   },1000);
 }
