@@ -130,7 +130,11 @@ dist
 .pnp.*
 output/invalid.json
 output/valid.json
+output/*
 data/sample_mixed_data_for_test.json
 data/sample_mixed_data_for_test.json
 output/invalid.json
 output/valid.json
+
+output/*
+data/*
