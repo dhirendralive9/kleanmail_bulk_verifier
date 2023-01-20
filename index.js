@@ -5,12 +5,14 @@ const { time } = require('console');
 var valid = [];     //This will store the valid email ids and details which will be written to valid.json
 var invalid = [];  //This will store the invalid email ids and details which will be written to invalid.jsonS
 //  In the response section ,we will have to look for delivery _status which we will use for filtering our valid mails from the bulk mail list.
+var not_checked = []
 
 data = JSON.parse(fs.readFileSync(`./data/sample_mixed_data_for_test.json`));
 
-const writeDate = (valid_data,invalid_data)=>{
+const writeDate = (valid_data,invalid_data,not_checked_data)=>{
   fs.writeFile(`./output/valid.json`,JSON.stringify(valid_data),error => console.log(error));
   fs.writeFile(`./output/invalid.json`,JSON.stringify(invalid_data),error => console.log(error));
+  fs.writeFile(`./output/not_checked.json`,JSON.stringify(not_checked_data),error => console.log(error));
 }
 
 
@@ -45,9 +47,12 @@ const validator = (detail)=>{
   })
   .catch(function (error) {
     console.log(error);
+    new_data = {fname:detail.fname,lname:detail.lname,email:detail.email};
+    not_checked.push(new_data)
+
   }).finally(()=> {
     if (len == 0){
-      writeDate(valid,invalid)
+      writeDate(valid,invalid,not_checked);
     }
   });
 }
