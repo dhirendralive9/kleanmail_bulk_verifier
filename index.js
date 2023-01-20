@@ -2,11 +2,11 @@ const fs = require('fs');
 var axios = require('axios');
 const { time } = require('console');
 
-var valid = [];     //This will store the valid email ids and details which will be written to valid.json
-var invalid = [];  //This will store the invalid email ids and details which will be written to invalid.jsonS
+var valid = JSON.parse(fs.readFileSync(`./output/valid.json`));;     //This will store the valid email ids and details which will be written to valid.json
+var invalid = JSON.parse(fs.readFileSync(`./output/invalid.json`));  //This will store the invalid email ids and details which will be written to invalid.jsonS
 //  In the response section ,we will have to look for delivery _status which we will use for filtering our valid mails from the bulk mail list.
 
-data = JSON.parse(fs.readFileSync(`./data/sample_mixed_data_for_test.json`));
+data = JSON.parse(fs.readFileSync(`./data/16012023data.json`));
 
 const writeDate = (valid_data,invalid_data)=>{
   fs.writeFile(`./output/valid.json`,JSON.stringify(valid_data),error => console.log(error));
@@ -24,7 +24,7 @@ const validator = (detail)=>{
     method: 'post',
     url: 'https://api.kleanmail.com/record_verification/api_record',
     headers: { 
-      'api_key': 'your_api_key_here', 
+      'api_key': 'api_key::_RNrtW7dYJ2Jd0Cqf6h20Llyn68KiMQZQWL2S0malfbY%3D', 
       'Content-Type': 'application/json'
     },
     data : info
@@ -65,7 +65,7 @@ function timer(){
     if(len>0){
      timer();
     }
-  },1000);
+  },1500);
 }
 
 timer();
